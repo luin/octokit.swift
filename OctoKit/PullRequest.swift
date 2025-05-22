@@ -4,6 +4,11 @@ import RequestKit
 import FoundationNetworking
 #endif
 
+public enum UserOrTeam: Codable {
+  case User
+  case Team
+}
+
 open class PullRequest: Codable {
     open private(set) var id: Int
     open var url: URL?
@@ -38,7 +43,7 @@ open class PullRequest: Codable {
     open var head: PullRequest.Branch?
     open var base: PullRequest.Branch?
 
-    open var requestedReviewers: [User]?
+    open var requestedReviewers: [UserOrTeam]?
     open var draft: Bool?
 
     public init(id: Int = -1,
@@ -67,7 +72,7 @@ open class PullRequest: Codable {
                 labels: [Label]? = nil,
                 head: PullRequest.Branch? = nil,
                 base: PullRequest.Branch? = nil,
-                requestedReviewers: [User]? = nil,
+                requestedReviewers: [UserOrTeam]? = nil,
                 draft: Bool? = nil) {
         self.id = id
         self.url = url
